@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import "./ProfessorDashboard.css";
 
 const ProfessorDashboard = () => {
     const [courses, setCourses] = useState([]);
@@ -32,7 +33,7 @@ const ProfessorDashboard = () => {
     }, []);
 
     return (
-        <div>
+        <div className="professor-dashboard">
             <h1>Dashboard del Profesor</h1>
             <h2>Mis Cursos</h2>
             <ul>
