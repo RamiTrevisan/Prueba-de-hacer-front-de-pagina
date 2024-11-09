@@ -7,6 +7,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import LogoutButton from './components/LogoutButton'; // Asegúrate de que este import esté presente
 import PrivateRoute from './routes/PrivateRoute'; // Importa el componente PrivateRoute
 import NoAccess from './routes/NoAccess'; // Importa la página de acceso denegado
+import UserManagement from './components/UserManagement'; // Importa el User Managment
 
 const App = () => {
     // Verifica si el usuario está autenticado
@@ -23,6 +24,7 @@ const App = () => {
                             <li><Link to="/professor-dashboard">Dashboard del Profesor</Link></li>
                             <li><Link to="/client-dashboard">Dashboard del Estudiante</Link></li>
                             <li><Link to="/admin-dashboard">Dashboard del Administrador</Link></li>
+                            <li><Link to="/user-management">Gestión de Usuarios</Link></li>
                             <LogoutButton /> {/* Renderiza el botón de cerrar sesión solo si está logueado */}
                         </>
                     )}
@@ -55,6 +57,14 @@ const App = () => {
                         </PrivateRoute>
                     } 
                 />
+                 <Route 
+                    path="/user-management" 
+                    element={
+                        <PrivateRoute>
+                            <UserManagement />
+                        </PrivateRoute>
+                    } 
+    /> 
                 <Route path="/no-access" element={<NoAccess />} /> {/* Ruta para acceso denegado */}
             </Routes>
         </Router>

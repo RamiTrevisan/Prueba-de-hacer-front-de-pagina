@@ -98,3 +98,80 @@ export const fetchAllSubjects = async () => {
     throw error;
   }
 };
+
+// Función para crear un nuevo usuario
+export const createUser  = async (userData) => {
+  const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
+
+  try {
+    const response = await fetch(`${API_URL}/Admin/createUser `, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Asegúrate de incluir el token
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData), // Envía los datos del nuevo usuario
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al crear usuario');
+    }
+
+    const data = await response.json();
+    return data; // Devuelve el usuario creado
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+// Función para actualizar un usuario
+export const updateUser  = async (userId, userData) => {
+  const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
+
+  try {
+    const response = await fetch(`${API_URL}/Admin/updateUser /${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Asegúrate de incluir el token
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData), // Envía los datos del usuario actualizado
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al actualizar usuario');
+    }
+
+    const data = await response.json();
+    return data; // Devuelve el usuario actualizado
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+
+// Función para eliminar un usuario
+export const deleteUser  = async (userId) => {
+  const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
+
+  try {
+    const response = await fetch(`${API_URL}/Admin/deleteUser /${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Asegúrate de incluir el token
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al eliminar usuario');
+    }
+
+    return; // No es necesario devolver nada en una eliminación exitosa
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
